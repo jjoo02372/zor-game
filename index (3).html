@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>조르의 과학 실험실 🛸</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic:wght@400;700;800&display=swap');
+:root{--bg:#07071a;--card:#10103a;--card2:#181850;--purple:#7c3aed;--purple-l:#a78bfa;--cyan:#22d3ee;--cyan-d:#0891b2;--yellow:#fbbf24;--green:#34d399;--red:#f87171;--orange:#fb923c;--border:#2a2a5a;--text:#e2e8f0;--dim:#7986a8;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Nanum Gothic',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+background:radial-gradient(1px 1px at 8% 12%,rgba(255,255,255,.7) 0%,transparent 100%),
+radial-gradient(1px 1px at 22% 45%,rgba(255,255,255,.4) 0%,transparent 100%),
+radial-gradient(1px 1px at 48% 8%,rgba(255,255,255,.6) 0%,transparent 100%),
+radial-gradient(1px 1px at 67% 28%,rgba(255,255,255,.5) 0%,transparent 100%),
+radial-gradient(1px 1px at 83% 62%,rgba(255,255,255,.7) 0%,transparent 100%),
+radial-gradient(1px 1px at 35% 72%,rgba(255,255,255,.3) 0%,transparent 100%),
+radial-gradient(1px 1px at 58% 85%,rgba(255,255,255,.5) 0%,transparent 100%),
+radial-gradient(1px 1px at 92% 18%,rgba(255,255,255,.4) 0%,transparent 100%),
+radial-gradient(1px 1px at 15% 90%,rgba(255,255,255,.6) 0%,transparent 100%),
+radial-gradient(1px 1px at 74% 52%,rgba(255,255,255,.3) 0%,transparent 100%);}
+.wrap{position:relative;z-index:1;max-width:700px;margin:0 auto;padding:18px 14px 60px;}
+
+/* ── 상단 ── */
+.top-header{text-align:center;margin-bottom:20px;}
+.top-badge{display:inline-block;background:linear-gradient(135deg,var(--purple),var(--cyan-d));color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:8px;}
+.top-title{font-family:'Jua',sans-serif;font-size:26px;color:var(--cyan);text-shadow:0 0 24px rgba(34,211,238,.45);margin-bottom:4px;}
+.top-sub{font-size:12px;color:var(--dim);}
+
+/* ── 신뢰도 ── */
+.trust-panel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 18px;margin-bottom:18px;}
+.trust-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.trust-label{font-size:13px;font-weight:700;color:var(--purple-l);}
+.trust-pct{font-family:'Jua',sans-serif;font-size:22px;color:var(--cyan);}
+.trust-bar{height:14px;background:#1a1a40;border-radius:7px;overflow:hidden;}
+.trust-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,var(--purple),var(--cyan));transition:width .8s cubic-bezier(.34,1.56,.64,1);}
+.trust-msg{font-size:12px;color:var(--dim);margin-top:6px;text-align:right;}
+
+/* ── 스테이지 탭 ── */
+.stage-row{display:flex;gap:6px;margin-bottom:18px;overflow-x:auto;padding-bottom:2px;}
+.stage-tab{flex-shrink:0;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:7px 14px;font-size:12px;color:var(--dim);white-space:nowrap;}
+.stage-tab.done{border-color:var(--green);color:var(--green);}
+.stage-tab.active{border-color:var(--cyan);color:var(--cyan);background:rgba(34,211,238,.08);}
+
+/* ── 스크린 ── */
+.screen{display:none;}
+.screen.show{display:block;animation:fadeUp .4s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── 입력 화면 ── */
+.login-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px 24px;margin-bottom:16px;}
+.login-title{font-family:'Jua',sans-serif;font-size:22px;color:var(--cyan);text-align:center;margin-bottom:6px;}
+.login-sub{font-size:13px;color:var(--dim);text-align:center;margin-bottom:24px;}
+.login-row{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+.login-field{flex:1;min-width:100px;}
+.login-label{font-size:12px;color:var(--dim);font-weight:700;margin-bottom:6px;}
+.login-input{width:100%;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--text);font-family:'Nanum Gothic',sans-serif;font-size:14px;outline:none;transition:border-color .2s;}
+.login-input:focus{border-color:var(--cyan);}
+.login-input::placeholder{color:var(--dim);}
+
+/* ── 조르 말풍선 ── */
+.zor-wrap{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;}
+.zor-face{width:60px;height:60px;flex-shrink:0;background:linear-gradient(135deg,#1e1b4b,#312e81);border:2px solid var(--purple-l);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 0 18px rgba(124,58,237,.35);animation:bob 3s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.zor-bubble{flex:1;background:var(--card2);border:1px solid var(--border);border-radius:0 16px 16px 16px;padding:13px 15px;font-size:14px;line-height:1.8;min-height:60px;}
+.zor-name{font-size:11px;color:var(--purple-l);font-weight:700;margin-bottom:4px;}
+.em{color:var(--yellow);font-weight:700;}
+.bad{color:var(--red);font-weight:700;}
+.good{color:var(--green);font-weight:700;}
+.cursor{display:inline-block;width:2px;height:1em;background:var(--cyan);animation:blink .7s infinite;vertical-align:middle;margin-left:2px;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ── 실험 행 ── */
+.exp-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;}
+.exp-title{font-size:13px;font-weight:700;color:var(--yellow);margin-bottom:12px;}
+.exp-row{display:flex;align-items:flex-start;gap:10px;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:11px 14px;margin-bottom:8px;cursor:pointer;transition:all .2s;font-size:14px;line-height:1.6;}
+.exp-row:hover:not(.locked){border-color:var(--cyan);transform:translateX(3px);}
+.exp-row.found{border-color:var(--green);background:rgba(52,211,153,.08);}
+.exp-row.safe{border-color:var(--border);opacity:.65;}
+.exp-row.shake{animation:shake .4s ease;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.exp-row.locked{cursor:default;}
+.row-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.row-fix{display:none;margin-top:8px;padding:8px 12px;background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3);border-radius:8px;font-size:13px;color:var(--green);line-height:1.6;}
+.row-fix.err{background:rgba(248,113,113,.07);border-color:rgba(248,113,113,.3);color:var(--red);}
+.row-fix.show{display:block;}
+.found-count{font-size:12px;color:var(--yellow);margin-bottom:10px;font-weight:700;}
+
+/* ── 선택지 ── */
+.choices{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.choice{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px 15px;font-size:14px;cursor:pointer;text-align:left;transition:all .2s;line-height:1.55;font-family:'Nanum Gothic',sans-serif;color:var(--text);}
+.choice:hover:not(:disabled){border-color:var(--cyan);background:rgba(34,211,238,.07);transform:translateX(3px);}
+.choice.hit{border-color:var(--green);background:rgba(52,211,153,.1);color:var(--green);}
+.choice.miss{border-color:var(--red);background:rgba(248,113,113,.07);color:var(--red);}
+.choice:disabled{cursor:default;transform:none;}
+
+/* ── 실험설계 ── */
+.design-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;}
+.design-q{font-size:14px;font-weight:700;color:var(--cyan);margin-bottom:12px;line-height:1.6;}
+.design-q .step-num{font-family:'Jua',sans-serif;font-size:18px;color:var(--yellow);margin-right:6px;}
+.design-options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
+.dchip{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;transition:all .2s;font-family:'Nanum Gothic',sans-serif;color:var(--text);}
+.dchip:hover:not(:disabled){border-color:var(--cyan);}
+.dchip.correct-pick{border-color:var(--green);background:rgba(52,211,153,.1);color:var(--green);font-weight:700;}
+.dchip.wrong-pick{border-color:var(--red);background:rgba(248,113,113,.07);color:var(--red);}
+.dchip:disabled{cursor:default;}
+.design-input{width:100%;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--text);font-family:'Nanum Gothic',sans-serif;font-size:14px;outline:none;transition:border-color .2s;resize:vertical;min-height:80px;}
+.design-input:focus{border-color:var(--cyan);}
+.design-input::placeholder{color:var(--dim);}
+.num-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.num-input{width:90px;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'Nanum Gothic',sans-serif;font-size:15px;outline:none;text-align:center;transition:border-color .2s;}
+.num-input:focus{border-color:var(--cyan);}
+.num-label{font-size:13px;color:var(--dim);}
+.confirm-btn{background:linear-gradient(135deg,var(--purple),var(--cyan-d));border:none;border-radius:10px;padding:11px 22px;color:#fff;font-family:'Jua',sans-serif;font-size:14px;cursor:pointer;transition:opacity .2s;}
+.confirm-btn:hover{opacity:.88;}
+.confirm-btn:disabled{opacity:.4;cursor:default;}
+
+/* ── 최종 설계서 ── */
+.design-report{background:linear-gradient(135deg,rgba(124,58,237,.14),rgba(34,211,238,.07));border:1px solid rgba(124,58,237,.35);border-radius:16px;padding:22px;margin-bottom:16px;}
+.report-title{font-family:'Jua',sans-serif;font-size:18px;color:var(--cyan);margin-bottom:16px;text-align:center;}
+.report-row{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;}
+.report-key{font-size:13px;font-weight:700;color:var(--purple-l);white-space:nowrap;min-width:110px;}
+.report-val{font-size:14px;color:var(--text);line-height:1.6;}
+
+/* ── 피드백 ── */
+.fb{border-radius:12px;padding:14px 16px;margin-bottom:14px;font-size:14px;line-height:1.75;display:none;}
+.fb.ok{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.35);}
+.fb.ng{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.3);}
+.fb.info{background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.25);}
+.fb.show{display:block;animation:fadeUp .35s ease;}
+.fb-title{font-weight:700;font-size:15px;margin-bottom:6px;}
+.fb.ok .fb-title{color:var(--green);}
+.fb.ng .fb-title{color:var(--red);}
+.fb.info .fb-title{color:var(--cyan);}
+
+/* ── 버튼 ── */
+.btn-next{width:100%;background:linear-gradient(135deg,var(--purple),var(--cyan-d));border:none;border-radius:12px;padding:14px;color:#fff;font-family:'Jua',sans-serif;font-size:16px;cursor:pointer;display:none;transition:opacity .2s,transform .1s;margin-top:4px;}
+.btn-next:hover{opacity:.88;transform:scale(1.01);}
+.btn-next.show{display:block;animation:fadeUp .4s ease;}
+.btn-main{background:transparent;border:2px solid var(--purple-l);border-radius:12px;padding:12px 28px;color:var(--purple-l);font-family:'Jua',sans-serif;font-size:15px;cursor:pointer;transition:all .2s;}
+.btn-main:hover{background:var(--purple);color:#fff;border-color:var(--purple);}
+.btn-confirm{background:linear-gradient(135deg,var(--purple),var(--cyan-d));border:none;border-radius:12px;padding:13px 24px;color:#fff;font-family:'Jua',sans-serif;font-size:15px;cursor:pointer;width:100%;margin-top:8px;display:none;transition:opacity .2s;}
+.btn-confirm:hover{opacity:.88;}
+.btn-confirm.show{display:block;animation:fadeUp .4s ease;}
+
+/* ── 기타 ── */
+.intro-story{background:linear-gradient(135deg,rgba(124,58,237,.14),rgba(34,211,238,.07));border:1px solid rgba(124,58,237,.3);border-radius:16px;padding:18px;margin-bottom:16px;font-size:14px;line-height:1.85;}
+.intro-story strong{color:var(--cyan);}
+.info-box{background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.2);border-radius:10px;padding:11px 14px;font-size:13px;color:var(--dim);line-height:1.7;margin-bottom:12px;}
+.info-box strong{color:var(--cyan);}
+.ending{text-align:center;padding:10px 0;}
+.ending-alien{font-size:72px;margin-bottom:12px;animation:bob 2s ease-in-out infinite;}
+.ending-title{font-family:'Jua',sans-serif;font-size:26px;color:var(--cyan);text-shadow:0 0 20px rgba(34,211,238,.4);margin-bottom:12px;}
+.ending-msg{font-size:14px;line-height:1.85;margin-bottom:20px;}
+.star-row{font-size:32px;letter-spacing:6px;margin-bottom:20px;}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);color:#fff;font-family:'Jua',sans-serif;font-size:15px;padding:10px 24px;border-radius:30px;z-index:999;transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .4s;opacity:0;pointer-events:none;}
+.toast.up{background:linear-gradient(135deg,var(--green),var(--cyan-d));}
+.toast.down{background:linear-gradient(135deg,#b91c1c,#991b1b);}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+.user-info-bar{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 14px;font-size:12px;color:var(--dim);margin-bottom:14px;display:none;}
+.user-info-bar span{color:var(--cyan);font-weight:700;}
+.section-divider{height:1px;background:var(--border);margin:16px 0;}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+
+<!-- 헤더 -->
+<div class="top-header">
+  <div class="top-badge">🔬 5학년 과학 · 용해와 용액</div>
+  <div class="top-title">🛸 조르의 과학 실험실</div>
+  <div class="top-sub">외계인 조르의 실험 오류를 찾고 신뢰도를 100%로 올려봐요!</div>
+</div>
+
+<!-- 신뢰도 (게임 시작 후 표시) -->
+<div class="trust-panel" id="trust-panel" style="display:none">
+  <div class="trust-top">
+    <div class="trust-label">👽 조르의 신뢰도</div>
+    <div class="trust-pct" id="trustPct">50%</div>
+  </div>
+  <div class="trust-bar"><div class="trust-fill" id="trustFill" style="width:50%"></div></div>
+  <div class="trust-msg" id="trustMsg">아직 조르를 설득하지 못했어요…</div>
+</div>
+
+<!-- 탭 -->
+<div class="stage-row">
+  <div class="stage-tab active" id="tab0">🌌 시작</div>
+  <div class="stage-tab" id="tab1">🌡️ 미션1</div>
+  <div class="stage-tab" id="tab2">🍦 미션2</div>
+  <div class="stage-tab" id="tab3">🍳 미션3</div>
+  <div class="stage-tab" id="tab4">🔭 실험설계</div>
+  <div class="stage-tab" id="tab5">🎉 엔딩</div>
+</div>
+
+<!-- 유저 정보 바 -->
+<div class="user-info-bar" id="userBar"></div>
+
+<!-- ═══ 로그인 ═══ -->
+<div class="screen show" id="sc-0">
+  <div class="login-card">
+    <div class="login-title">👽 조르의 과학 실험실</div>
+    <div class="login-sub">시작하기 전에 이름을 알려주세요!</div>
+    <div class="login-row">
+      <div class="login-field" style="flex:0 0 80px">
+        <div class="login-label">학년</div>
+        <input class="login-input" id="inp-grade" type="number" min="1" max="6" placeholder="5" />
+      </div>
+      <div class="login-field" style="flex:0 0 80px">
+        <div class="login-label">반</div>
+        <input class="login-input" id="inp-class" type="number" min="1" max="20" placeholder="1" />
+      </div>
+      <div class="login-field">
+        <div class="login-label">이름</div>
+        <input class="login-input" id="inp-name" type="text" placeholder="홍길동" />
+      </div>
+    </div>
+    <button class="btn-next show" style="margin-top:8px" onclick="startGame()">🚀 게임 시작!</button>
+    <div id="login-err" style="color:var(--red);font-size:13px;margin-top:8px;text-align:center;display:none;">학년, 반, 이름을 모두 입력해주세요!</div>
+  </div>
+</div>
+
+<!-- ═══ 인트로 ═══ -->
+<div class="screen" id="sc-intro">
+  <div class="intro-story">
+    🚀 <strong>긴급 신호 수신!</strong><br>
+    초록별에서 외계인 <strong>조르</strong>가 지구에 불시착했어요.<br>
+    조르는 실험할 때마다 <strong>이상한 오류</strong>를 내고 있어요!<br><br>
+    오류를 찾아서 고쳐주면 <strong>조르의 신뢰도 게이지</strong>가 올라가요.<br>
+    하지만 <strong>틀리면 신뢰도가 내려가요!</strong> 신중하게 생각해요 🤔<br>
+    신뢰도가 100%가 되면 조르가 초록별로 돌아갈 수 있어요! 🌟
+  </div>
+  <div class="zor-wrap">
+    <div class="zor-face">👽</div>
+    <div class="zor-bubble">
+      <div class="zor-name">조르</div>
+      <span id="intro-text"></span><span class="cursor" id="intro-cur"></span>
+    </div>
+  </div>
+  <button class="btn-next" id="btn-intro" onclick="go(1)">🛸 조르 돕기 시작!</button>
+</div>
+
+<!-- ═══ 미션1: 온도와 용해 속도 ═══ -->
+<div class="screen" id="sc-1">
+  <div class="zor-wrap">
+    <div class="zor-face">👽</div>
+    <div class="zor-bubble">
+      <div class="zor-name">조르 · 미션 1</div>
+      <span id="zor-text1"></span><span class="cursor" id="zor-cur1"></span>
+    </div>
+  </div>
+  <div class="exp-card" id="exp1" style="display:none">
+    <div class="exp-title">🧪 조르의 실험 설계 — 잘못된 절차를 클릭해서 찾아라! (1개)</div>
+    <div class="exp-row" id="r1-1" onclick="cr1(1,false)"><div class="row-icon">1️⃣</div><div><div>차가운 물(5℃)과 따뜻한 물(50℃)을 비커에 각각 100mL씩 담는다.</div><div class="row-fix" id="f1-1">✅ 온도 조건을 다르게 설정한 건 맞아요!</div></div></div>
+    <div class="exp-row" id="r1-2" onclick="cr1(2,false)"><div class="row-icon">2️⃣</div><div><div>두 비커에 설탕을 각각 1스푼씩 넣는다.</div><div class="row-fix" id="f1-2">✅ 설탕 양을 같게 하는 건 맞아요!</div></div></div>
+    <div class="exp-row" id="r1-3" onclick="cr1(3,true)"><div class="row-icon">3️⃣</div><div><div>차가운 물 비커는 유리막대로 10번 젓고, 따뜻한 물 비커는 젓지 않는다.</div><div class="row-fix err" id="f1-3">❗ 오류! 젓는 방법이 달라요. 온도 외에 모든 조건은 같게 해야 해요!</div></div></div>
+    <div class="exp-row" id="r1-4" onclick="cr1(4,false)"><div class="row-icon">4️⃣</div><div><div>설탕이 완전히 녹는 데 걸리는 시간을 측정하여 비교한다.</div><div class="row-fix" id="f1-4">✅ 시간을 측정해서 비교하는 방법도 맞아요!</div></div></div>
+  </div>
+  <div class="fb" id="fb1"></div>
+  <div class="zor-wrap" id="zr1" style="display:none">
+    <div class="zor-face">👽</div>
+    <div class="zor-bubble"><div class="zor-name">조르 반응</div><span id="zr1-text"></span><span class="cursor" id="zr1-cur"></span></div>
+  </div>
+  <button class="btn-next" id="btn1" onclick="go(2)">다음 미션 ➡️</button>
+</div>
+
+<!-- ═══ 미션2: 아이스크림 오류 2개 ═══ -->
+<div class="screen" id="sc-2">
+  <div class="zor-wrap">
+    <div class="zor-face">👽</div>
+    <div class="zor-bubble">
+      <div class="zor-name">조르 · 미션 2</div>
+      <span id="zor-text2"></span><span class="cursor" id="zor-cur2"></span>
+    </div>
+  </div>
+  <div class="info-box" id="exp2-info" style="display:none"><strong>실험 목표</strong>: 물의 온도에 따라 설탕이 녹는 양이 달라지는지 알아보기</div>
+  <div class="exp-card" id="exp2" style="display:none">
+    <div class="exp-title">🧪 조르의 실험 설계 — 오류 2개를 모두 찾아라!</div>
+    <div class="found-count" id="fc2">발견한 오류: 0 / 2</div>
+    <div class="exp-row" id="r2-1" onclick="cr2(1,false)"><div class="row-icon">1️⃣</div><div><div>차가운 물(5℃) 비커와 따뜻한 물(60℃) 비커를 준비한다.</div><div class="row-fix" id="f2-1">✅ 온도를 다르게 하는 건 맞아요!</div></div></div>
+    <div class="exp-row" id="r2-2" onclick="cr2(2,true)"><div class="row-icon">2️⃣</div><div><div>차가운 물에는 설탕 3스푼, 따뜻한 물에는 설탕 7스푼을 먼저 넣는다.</div><div class="row-fix err" id="f2-2">❗ 오류! 처음에 넣는 설탕 양이 달라요. 같은 양씩 넣어야 공평해요!</div></div></div>
+    <div class="exp-row" id="r2-3" onclick="cr2(3,false)"><div class="row-icon">3️⃣</div><div><div>두 비커의 물의 양은 모두 100mL로 같게 한다.</div><div class="row-fix" id="f2-3">✅ 물의 양을 같게 하는 건 정확해요!</div></div></div>
+    <div class="exp-row" id="r2-4" onclick="cr2(4,true)"><div class="row-icon">4️⃣</div><div><div>차가운 물은 유리막대로 10번 젓고, 따뜻한 물은 젓지 않는다.</div><div class="row-fix err" id="f2-4">❗ 오류! 젓는 방법이 달라요. 두 비커 모두 같은 방법으로 저어야 해요!</div></div></div>
+  </div>
+  <div class="fb" id="fb2"></div>
+  <div class="zor-wrap" id="zr2" style="display:none">
+    <div class="zor-face">👽</div>
+    <div class="zor-bubble"><div class="zor-name">조르 반응</div><span id="zr2-text"></span><span class="cursor" id="zr2-cur"></span></div>
+  </div>
+  <button class="btn-next" id="btn2" onclick="go(3)">다음 미션 ➡️</button>
+</div>
+
+<!-- ═══ 미션3: 계란후라이 판단 ═══ -->
+<div class="screen" id="sc-3">
+  <div class="zor-wrap">
+    <div class="zor-face">👽</div>
+    <div class="zor-bubble">
+      <div class="zor-name">조르 · 미션 3</div>
+      <span id="zor-text3"></span><span class="cursor" id="zor-cur3"></span>
+    </div>
+  </div>
+  <div class="info-box" id="exp3-info" style="display:none"><strong>생각해봐요</strong>: 조르가 어떤 경험을 근거로 결론을 냈나요? 그 경험이 올바른 근거가 될 수 있을까요?</div>
+  <div class="choices" id="ch3" style="display:none">
+    <button class="choice" onclick="pick3(this,false)">✅ 맞아요. 소금은 물에 무한정 녹아요.</button>
+    <button class="choice" onclick="pick3(this,true)">❌ 틀렸어요. 계란에 뿌리는 것과 물에 녹이는 건 달라요. 실험 없이 단정하면 안 돼요.</button>
+    <button class="choice" onclick="pick3(this,false)">🤔 짤수록 물에도 많이 녹는 거 아닌가요?</button>
+  </div>
+  <div class="fb" id="fb3"></div>
+  <div class="zor-wrap" id="zr3" style="display:none">
+    <div class="zor-face">👽</div>
+    <div class="zor-bubble"><div class="zor-name">조르 반응</div><span id="zr3-text"></span><span class="cursor" id="zr3-cur"></span></div>
+  </div>
+  <button class="btn-next" id="btn3" onclick="go(4)">최종 미션 ➡️</button>
+</div>
+
+<!-- ═══ 미션4: 실험 설계 ═══ -->
+<div class="screen" id="sc-4">
+  <div class="zor-wrap">
+    <div class="zor-face">👽</div>
+    <div class="zor-bubble">
+      <div class="zor-name">조르 · 최종 미션 — 실험 설계</div>
+      <span id="zor-text4"></span><span class="cursor" id="zor-cur4"></span>
+    </div>
+  </div>
+
+  <!-- 설계 Q1 -->
+  <div class="design-card" id="dq1-card" style="display:none">
+    <div class="design-q"><span class="step-num">Q1</span> 용액의 진하기를 비교할 수 있는 방법에는 어떤 것이 있을까요?<br><small style="color:var(--dim);font-weight:400">(알고 있는 방법을 모두 골라봐요)</small></div>
+    <div class="design-options" id="dq1-opts">
+      <button class="dchip" onclick="toggleChip(this,'dq1')">🎨 색깔로 비교</button>
+      <button class="dchip" onclick="toggleChip(this,'dq1')">🍅 방울토마토 띄우기</button>
+      <button class="dchip" onclick="toggleChip(this,'dq1')">👅 맛으로 비교</button>
+      <button class="dchip" onclick="toggleChip(this,'dq1')">🤏 끈적이는 정도</button>
+      <button class="dchip" onclick="toggleChip(this,'dq1')">⚖️ 무게 재기</button>
+    </div>
+    <div class="fb info" id="fb-dq1"></div>
+    <button class="confirm-btn show" onclick="confirmDQ(1)">확인 ✓</button>
+  </div>
+
+  <!-- 설계 Q2 -->
+  <div class="design-card" id="dq2-card" style="display:none">
+    <div class="design-q"><span class="step-num">Q2</span> 이번 실험에서 비교하고 싶은 것은 무엇인가요?</div>
+    <div class="design-options" id="dq2-opts">
+      <button class="dchip" onclick="pickDQ(2,this,'r','용액의 진하기')">용액의 진하기</button>
+      <button class="dchip" onclick="pickDQ(2,this,'w','')">물의 온도</button>
+      <button class="dchip" onclick="pickDQ(2,this,'w','')">용질의 종류</button>
+    </div>
+    <div class="fb" id="fb-dq2"></div>
+  </div>
+
+  <!-- 설계 Q3 -->
+  <div class="design-card" id="dq3-card" style="display:none">
+    <div class="design-q"><span class="step-num">Q3</span> 비교 실험에서 <span style="color:var(--yellow)">다르게</span> 해야 할 조건은 무엇인가요?</div>
+    <div class="design-options" id="dq3-opts">
+      <button class="dchip" onclick="pickDQ(3,this,'w','')">물의 온도</button>
+      <button class="dchip" onclick="pickDQ(3,this,'r','용질(설탕)의 양')">용질(설탕)의 양</button>
+      <button class="dchip" onclick="pickDQ(3,this,'w','')">비커의 크기</button>
+      <button class="dchip" onclick="pickDQ(3,this,'w','')">젓는 횟수</button>
+    </div>
+    <div class="fb" id="fb-dq3"></div>
+  </div>
+
+  <!-- 설계 Q4 -->
+  <div class="design-card" id="dq4-card" style="display:none">
+    <div class="design-q"><span class="step-num">Q4</span> 비교 실험에서 <span style="color:var(--cyan)">같게</span> 해야 할 조건을 모두 골라봐요.</div>
+    <div class="design-options" id="dq4-opts">
+      <button class="dchip" onclick="toggleChip(this,'dq4')">물의 양</button>
+      <button class="dchip" onclick="toggleChip(this,'dq4')">물의 온도</button>
+      <button class="dchip" onclick="toggleChip(this,'dq4')">설탕의 양</button>
+      <button class="dchip" onclick="toggleChip(this,'dq4')">젓는 횟수</button>
+      <button class="dchip" onclick="toggleChip(this,'dq4')">비커의 크기</button>
+    </div>
+    <div class="fb" id="fb-dq4"></div>
+    <button class="confirm-btn show" onclick="confirmDQ(4)">확인 ✓</button>
+  </div>
+
+  <!-- 설계 Q5: 물의 양 -->
+  <div class="design-card" id="dq5-card" style="display:none">
+    <div class="design-q"><span class="step-num">Q5</span> 각 비커에 물을 몇 mL씩 넣을 건가요?</div>
+    <div class="num-row">
+      <input class="num-input" id="inp-water" type="number" min="50" max="500" placeholder="150" />
+      <span class="num-label">mL</span>
+      <button class="confirm-btn show" style="flex:1;margin-top:0" onclick="confirmDQ(5)">확인 ✓</button>
+    </div>
+    <div class="fb" id="fb-dq5"></div>
+  </div>
+
+  <!-- 설계 Q6: 비커 개수 -->
+  <div class="design-card" id="dq6-card" style="display:none">
+    <div class="design-q"><span class="step-num">Q6</span> 진하기가 다른 용액을 만들려면 비커가 몇 개 필요한가요?<br><small style="color:var(--dim);font-weight:400">(최소 2개 이상)</small></div>
+    <div class="num-row">
+      <input class="num-input" id="inp-beaker" type="number" min="2" max="6" placeholder="2" />
+      <span class="num-label">개</span>
+      <button class="confirm-btn show" style="flex:1;margin-top:0" onclick="confirmDQ(6)">확인 ✓</button>
+    </div>
+    <div class="fb" id="fb-dq6"></div>
+  </div>
+
+  <!-- 설계 Q7: 설탕 양 차이 -->
+  <div class="design-card" id="dq7-card" style="display:none">
+    <div class="design-q"><span class="step-num">Q7</span> 비커마다 설탕을 몇 숟가락씩 차이나게 넣을 건가요?<br><small style="color:var(--dim);font-weight:400">(예: 비커1=1스푼, 비커2=3스푼이면 '2' 입력)</small></div>
+    <div class="num-row">
+      <input class="num-input" id="inp-sugar" type="number" min="1" max="10" placeholder="2" />
+      <span class="num-label">스푼 차이</span>
+      <button class="confirm-btn show" style="flex:1;margin-top:0" onclick="confirmDQ(7)">확인 ✓</button>
+    </div>
+    <div class="fb" id="fb-dq7"></div>
+  </div>
+
+  <!-- 설계 Q8: 진하기 비교 방법 선택 -->
+  <div class="design-card" id="dq8-card" style="display:none">
+    <div class="design-q"><span class="step-num">Q8</span> 완성된 용액의 진하기를 어떤 방법으로 비교할 건가요?</div>
+    <div class="design-options" id="dq8-opts">
+      <button class="dchip" onclick="pickDQ(8,this,'r','방울토마토 띄우기')">🍅 방울토마토 띄우기</button>
+      <button class="dchip" onclick="pickDQ(8,this,'r','색깔로 비교')">🎨 색깔로 비교</button>
+      <button class="dchip" onclick="pickDQ(8,this,'r','끈적이는 정도')">🤏 끈적이는 정도</button>
+    </div>
+    <div class="fb" id="fb-dq8"></div>
+  </div>
+
+  <!-- 설계 Q9: 진하기 판단 기준 -->
+  <div class="design-card" id="dq9-card" style="display:none">
+    <div class="design-q"><span class="step-num">Q9</span> 방울토마토를 이용할 때, 어떤 비커의 용액이 더 진하다고 판단할 수 있을까요?</div>
+    <div class="design-options" id="dq9-opts">
+      <button class="dchip" onclick="pickDQ(9,this,'w','')">방울토마토가 더 낮게 가라앉는 용액</button>
+      <button class="dchip" onclick="pickDQ(9,this,'r','방울토마토가 더 높이 뜨는 용액')">방울토마토가 더 높이 뜨는 용액</button>
+      <button class="dchip" onclick="pickDQ(9,this,'w','')">방울토마토 색이 변하는 용액</button>
+    </div>
+    <div class="fb" id="fb-dq9"></div>
+  </div>
+
+  <!-- 최종 설계서 -->
+  <div class="design-report" id="design-report" style="display:none">
+    <div class="report-title">📋 내가 설계한 실험</div>
+    <div id="report-content"></div>
+  </div>
+
+  <button class="btn-next" id="btn4" onclick="go(5)">🎉 조르 구하기 완료!</button>
+</div>
+
+<!-- ═══ 엔딩 ═══ -->
+<div class="screen" id="sc-5">
+  <div class="ending">
+    <div class="ending-alien">👽</div>
+    <div class="star-row">⭐⭐⭐⭐⭐</div>
+    <div class="ending-title">조르 신뢰도 <span id="final-trust">100</span>%!</div>
+    <div class="ending-msg" id="ending-msg"></div>
+    <button class="btn-main" onclick="restart()">🔄 다시 도전!</button>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+// ── 상태 ──
+let trust = 50;
+let userData = {grade:'', cls:'', name:''};
+let answers = {};
+let dq1Picks = [], dq4Picks = [];
+let dqStep = 0;
+
+// Google Apps Script 웹앱 URL을 여기에 입력하세요
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+// ── 신뢰도 메시지 ──
+function trustMsg(t) {
+  if(t<=20) return '조르가 많이 실망했어요… 😢';
+  if(t<=40) return '아직 부족해요. 신중하게 생각해봐요!';
+  if(t<=60) return '조금씩 이해하고 있어요!';
+  if(t<=80) return '거의 다 됐어요! 조금만 더!';
+  return '완벽해요! 조르가 다 배웠어요! 🎉';
+}
+
+function setTrust(v, delta) {
+  trust = Math.max(0, Math.min(100, trust + delta));
+  document.getElementById('trustPct').textContent = trust + '%';
+  document.getElementById('trustFill').style.width = trust + '%';
+  document.getElementById('trustMsg').textContent = trustMsg(trust);
+  const t = document.getElementById('toast');
+  if(delta > 0) {
+    t.className = 'toast up show'; t.textContent = '신뢰도 +' + delta + '%! 🎉';
+  } else {
+    t.className = 'toast down show'; t.textContent = '신뢰도 ' + delta + '%! 😢';
+  }
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ── 타이핑 애니메이션 ──
+function typeText(spanId, curId, text, speed, cb) {
+  const span = document.getElementById(spanId);
+  const cur = document.getElementById(curId);
+  span.innerHTML = ''; cur.style.display = 'inline-block';
+  let i = 0;
+  const iv = setInterval(() => {
+    if(i < text.length) {
+      span.innerHTML += text[i] === '\n' ? '<br>' : text[i];
+      i++;
+    } else {
+      clearInterval(iv);
+      cur.style.display = 'none';
+      if(cb) cb();
+    }
+  }, speed || 28);
+}
+
+// ── 화면 이동 ──
+function go(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('show'));
+  const id = n === 'intro' ? 'sc-intro' : 'sc-' + n;
+  document.getElementById(id).classList.add('show');
+  if(n !== 'intro' && typeof n === 'number') {
+    document.querySelectorAll('.stage-tab').forEach((t,i) => {
+      t.classList.remove('active','done');
+      if(i < n) t.classList.add('done');
+    });
+    document.getElementById('tab'+n).classList.add('active');
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(n === 'intro') startIntro();
+  else if(n === 1) startM1();
+  else if(n === 2) startM2();
+  else if(n === 3) startM3();
+  else if(n === 4) startM4();
+  else if(n === 5) showEnding();
+}
+
+function startGame() {
+  const g = document.getElementById('inp-grade').value.trim();
+  const c = document.getElementById('inp-class').value.trim();
+  const nm = document.getElementById('inp-name').value.trim();
+  if(!g || !c || !nm) { document.getElementById('login-err').style.display='block'; return; }
+  userData = {grade:g, cls:c, name:nm};
+  // 신뢰도 패널 표시
+  document.getElementById('trust-panel').style.display = 'block';
+  const bar = document.getElementById('userBar');
+  bar.innerHTML = `<span>${g}학년 ${c}반 ${nm}</span> 님, 환영해요! 👽`;
+  bar.style.display = 'block';
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('show'));
+  document.getElementById('sc-intro').classList.add('show');
+  startIntro();
+}
+
+function startIntro() {
+  const msg = `나는 초록별 1등 과학자 조르예요!\n지구 과학도 금방 배울 수 있다고 생각했는데…\n실험할 때마다 결과가 이상해요 😢\n오류를 찾아주면 신뢰도가 올라가요!\n하지만 틀리면 신뢰도가 내려가니까 신중하게 생각해줘요! 🚀`;
+  typeText('intro-text','intro-cur', msg, 25, () => {
+    document.getElementById('btn-intro').classList.add('show');
+  });
+}
+
+// ── 미션 1: 온도와 용해 속도 ──
+let m1done = false;
+function startM1() {
+  const msg = `물이 따뜻하면 설탕이 더 빨리 녹을까요?\n그걸 확인하는 실험을 설계했어요.\n근데 선생님이 오류가 있다고 했어요!\n잘못된 절차를 클릭해서 찾아주세요! 🌡️`;
+  typeText('zor-text1','zor-cur1', msg, 25, () => {
+    document.getElementById('exp1').style.display = 'block';
+  });
+}
+function cr1(idx, isErr) {
+  if(m1done) return;
+  if(isErr) {
+    m1done = true;
+    [1,2,3,4].forEach(i => {
+      const r = document.getElementById('r1-'+i);
+      r.classList.add('locked'); r.onclick = null;
+      document.getElementById('f1-'+i).classList.add('show');
+      r.classList.add(i===3 ? 'found' : 'safe');
+    });
+    answers.m1 = '정답(젓는 방법이 다름)';
+    showFb('fb1','ok','🎉 찾았어요!','온도 실험에서는 온도만 다르게 해야 해요!<br>젓는 방법도 달라지면 <strong style="color:var(--cyan)">어떤 것 때문에 결과가 달라졌는지</strong> 알 수 없어요!');
+    document.getElementById('zr1').style.display = 'flex';
+    typeText('zr1-text','zr1-cur','아하! 온도 말고 젓는 방법도 달라져서\n공평한 비교가 안 됐어요!\n비교 실험에서는 바꾸는 조건이 딱 하나여야 해요!\n신뢰도 +15%! 🚀', 28, () => {
+      setTrust(trust, 15);
+      document.getElementById('btn1').classList.add('show');
+    });
+  } else {
+    const r = document.getElementById('r1-'+idx);
+    r.classList.add('shake');
+    setTimeout(() => r.classList.remove('shake'), 400);
+    setTrust(trust, -10);
+    showFb('fb1','ng','🤔 다시 생각해봐요!','이 절차는 괜찮아요. 다른 곳을 찾아봐요!');
+  }
+}
+
+// ── 미션 2 ──
+let m2found = [];
+function startM2() {
+  const msg = `이번엔 아이스크림에 꽂혔어요!\n아이스크림처럼, 물의 온도에 따라 설탕이\n녹는 양이 달라지는지 알아보고 싶어요.\n이번엔 오류가 2개예요! 모두 찾아주세요! 🍦`;
+  typeText('zor-text2','zor-cur2', msg, 25, () => {
+    document.getElementById('exp2-info').style.display = 'block';
+    document.getElementById('exp2').style.display = 'block';
+  });
+}
+function cr2(idx, isErr) {
+  if(m2found.includes(idx)) return;
+  if(isErr) {
+    m2found.push(idx);
+    const r = document.getElementById('r2-'+idx);
+    r.classList.add('found','locked'); r.onclick = null;
+    document.getElementById('f2-'+idx).classList.add('show');
+    document.getElementById('fc2').textContent = '발견한 오류: ' + m2found.length + ' / 2';
+    if(m2found.length === 2) {
+      [1,2,3,4].forEach(i => {
+        const rr = document.getElementById('r2-'+i);
+        rr.classList.add('locked'); rr.onclick = null;
+        document.getElementById('f2-'+i).classList.add('show');
+        if(!m2found.includes(i)) rr.classList.add('safe');
+      });
+      answers.m2 = '정답(설탕 양+젓기 방법)';
+      showFb('fb2','ok','🎉 두 개 모두 찾았어요!','② 설탕 양이 다른 것, ④ 젓는 방법이 다른 것 — 둘 다 오류예요!<br>다르게 할 조건은 <strong style="color:var(--cyan)">온도 딱 하나</strong>뿐이에요!');
+      document.getElementById('zr2').style.display = 'flex';
+      typeText('zr2-text','zr2-cur','설탕 양도, 젓는 방법도 같게 해야 하는군요!\n다르게 할 건 온도 딱 하나뿐!\n신뢰도 +15%! 🚀', 28, () => {
+        setTrust(trust, 15);
+        document.getElementById('btn2').classList.add('show');
+      });
+    } else {
+      showFb('fb2','ok','🔍 오류 1개 발견! (1/2)','잘 찾았어요! 오류가 하나 더 있어요!');
+      setTrust(trust, 5);
+    }
+  } else {
+    const r = document.getElementById('r2-'+idx);
+    r.classList.add('shake');
+    setTimeout(() => r.classList.remove('shake'), 400);
+    setTrust(trust, -10);
+    showFb('fb2','ng','🤔 이건 맞아요!','이 절차는 괜찮아요. 다른 곳을 찾아봐요!');
+  }
+}
+
+// ── 미션 3 ──
+let m3done = false;
+function startM3() {
+  const msg = `지구에서 계란후라이를 처음 먹어봤어요! 짭짤하더라고요.\n소금을 더 뿌릴수록 더 짜졌어요.\n그래서 결론을 냈어요:\n"소금은 물에 계속 넣을수록 계속 녹아요! 한계가 없어요! 🍳"\n이 생각, 맞을까요?`;
+  typeText('zor-text3','zor-cur3', msg, 25, () => {
+    document.getElementById('exp3-info').style.display = 'block';
+    document.getElementById('ch3').style.display = 'flex';
+  });
+}
+function pick3(btn, right) {
+  if(m3done) return;
+  document.querySelectorAll('#ch3 .choice').forEach(b => b.disabled = true);
+  if(right) {
+    m3done = true;
+    btn.classList.add('hit');
+    answers.m3 = '정답(실험 없이 단정 불가)';
+    showFb('fb3','ok','🎉 정확해요!','계란에 소금 뿌리는 것과 물에 소금 녹이는 건 완전히 달라요!<br><strong style="color:var(--cyan)">실험 없이 단정 지으면 안 돼요!</strong>');
+    document.getElementById('zr3').style.display = 'flex';
+    typeText('zr3-text','zr3-cur','계란후라이 경험만으로 결론을 낸 게 잘못됐군요!\n실험 없이 당연히 그렇겠지 라고 생각한 거예요.\n신뢰도 +15%! 🚀', 28, () => {
+      setTrust(trust, 15);
+      document.getElementById('btn3').classList.add('show');
+    });
+  } else {
+    btn.classList.add('miss');
+    setTrust(trust, -10);
+    showFb('fb3','ng','🤔 다시 생각해봐요!','계란에 소금 뿌리는 것과 물에 녹이는 건 같은 상황일까요?');
+    setTimeout(() => {
+      document.querySelectorAll('#ch3 .choice').forEach(b => { b.disabled=false; b.classList.remove('miss','hit'); });
+      document.getElementById('fb3').className = 'fb';
+    }, 1800);
+  }
+}
+
+// ── 미션 4: 실험설계 ──
+let designData = {
+  methods: [], compareTarget: '', diffCond: '',
+  sameConds: [], waterMl: '', beakerCount: '',
+  sugarDiff: '', compareMethod: '', judgeCriteria: ''
+};
+let dqLocked = {};
+
+function startM4() {
+  const msg = `드디어 최종 미션이에요!\n용액의 진하기를 비교하는 실험을 직접 설계해봐요!\n단계별 질문에 답하면 나만의 실험 설계서가 완성돼요! 🔭`;
+  typeText('zor-text4','zor-cur4', msg, 25, () => {
+    document.getElementById('dq1-card').style.display = 'block';
+  });
+}
+
+function toggleChip(btn, group) {
+  btn.classList.toggle('correct-pick');
+}
+
+function confirmDQ(n) {
+  if(n === 1) {
+    const picked = [...document.querySelectorAll('#dq1-opts .dchip.correct-pick')].map(b => b.textContent.trim());
+    if(picked.length === 0) { showFbD('fb-dq1','ng','적어도 하나는 골라봐요!',''); return; }
+    designData.methods = picked;
+    answers.dq1 = picked.join(', ');
+    dqLocked[1] = true;
+    document.querySelectorAll('#dq1-opts .dchip').forEach(b => b.disabled = true);
+    showFbD('fb-dq1','ok','✓ 확인!',`선택한 방법: ${picked.join(', ')}`);
+    document.querySelector('#dq1-card .confirm-btn').disabled = true;
+    setTimeout(() => { document.getElementById('dq2-card').style.display = 'block'; scrollToEl('dq2-card'); }, 600);
+  }
+  else if(n === 4) {
+    const picked = [...document.querySelectorAll('#dq4-opts .dchip.correct-pick')].map(b => b.textContent.trim());
+    if(picked.length === 0) { showFbD('fb-dq4','ng','적어도 하나는 골라봐요!',''); return; }
+    const wrong = picked.filter(p => p === '설탕의 양');
+    if(wrong.length > 0) {
+      showFbD('fb-dq4','ng','🤔 설탕의 양은 다르게 해야 해요!','진하기를 다르게 하려면 설탕 양이 달라야 해요. 다시 선택해봐요!');
+      setTrust(trust, -5);
+      document.querySelectorAll('#dq4-opts .dchip.correct-pick').forEach(b => b.classList.remove('correct-pick'));
+      return;
+    }
+    designData.sameConds = picked;
+    answers.dq4 = picked.join(', ');
+    dqLocked[4] = true;
+    document.querySelectorAll('#dq4-opts .dchip').forEach(b => b.disabled = true);
+    showFbD('fb-dq4','ok','✓ 확인!',`같게 할 조건: ${picked.join(', ')}`);
+    document.querySelector('#dq4-card .confirm-btn').disabled = true;
+    setTimeout(() => { document.getElementById('dq5-card').style.display = 'block'; scrollToEl('dq5-card'); }, 600);
+  }
+  else if(n === 5) {
+    const v = document.getElementById('inp-water').value;
+    if(!v || v < 50 || v > 500) { showFbD('fb-dq5','ng','50~500mL 사이로 입력해봐요!',''); return; }
+    designData.waterMl = v;
+    answers.dq5 = v + 'mL';
+    showFbD('fb-dq5','ok','✓ 확인!', v + 'mL씩 담을게요!');
+    document.getElementById('inp-water').disabled = true;
+    document.querySelector('#dq5-card .confirm-btn').disabled = true;
+    setTimeout(() => { document.getElementById('dq6-card').style.display = 'block'; scrollToEl('dq6-card'); }, 600);
+  }
+  else if(n === 6) {
+    const v = document.getElementById('inp-beaker').value;
+    if(!v || v < 2 || v > 6) { showFbD('fb-dq6','ng','2~6개 사이로 입력해봐요!',''); return; }
+    designData.beakerCount = v;
+    answers.dq6 = v + '개';
+    showFbD('fb-dq6','ok','✓ 확인!', v + '개 비커를 사용할게요!');
+    document.getElementById('inp-beaker').disabled = true;
+    document.querySelector('#dq6-card .confirm-btn').disabled = true;
+    setTimeout(() => { document.getElementById('dq7-card').style.display = 'block'; scrollToEl('dq7-card'); }, 600);
+  }
+  else if(n === 7) {
+    const v = document.getElementById('inp-sugar').value;
+    if(!v || v < 1) { showFbD('fb-dq7','ng','1 이상의 숫자를 입력해봐요!',''); return; }
+    designData.sugarDiff = v;
+    answers.dq7 = v + '스푼 차이';
+    showFbD('fb-dq7','ok','✓ 확인!', '비커마다 설탕을 ' + v + '스푼씩 차이나게 넣을게요!');
+    document.getElementById('inp-sugar').disabled = true;
+    document.querySelector('#dq7-card .confirm-btn').disabled = true;
+    setTimeout(() => { document.getElementById('dq8-card').style.display = 'block'; scrollToEl('dq8-card'); }, 600);
+  }
+}
+
+function pickDQ(q, btn, type, val) {
+  if(dqLocked[q]) return;
+  const opts = document.querySelectorAll('#dq'+q+'-opts .dchip');
+  opts.forEach(b => b.classList.remove('correct-pick','wrong-pick'));
+  if(type === 'r') {
+    dqLocked[q] = true;
+    btn.classList.add('correct-pick');
+    opts.forEach(b => { if(b!==btn) b.disabled=true; });
+    answers['dq'+q] = val;
+    if(q===2) {
+      designData.compareTarget = val;
+      showFbD('fb-dq2','ok','✓ 확인!','용액의 진하기를 비교하는 거예요!');
+      setTimeout(() => { document.getElementById('dq3-card').style.display='block'; scrollToEl('dq3-card'); }, 600);
+    } else if(q===3) {
+      designData.diffCond = val;
+      showFbD('fb-dq3','ok','✓ 확인!','설탕의 양을 다르게 해서 진하기를 다르게 만들어요!');
+      setTimeout(() => { document.getElementById('dq4-card').style.display='block'; scrollToEl('dq4-card'); }, 600);
+    } else if(q===8) {
+      designData.compareMethod = val;
+      showFbD('fb-dq8','ok','✓ 확인!','좋은 방법이에요!');
+      if(val === '방울토마토 띄우기') {
+        setTimeout(() => { document.getElementById('dq9-card').style.display='block'; scrollToEl('dq9-card'); }, 600);
+      } else {
+        answers.dq9 = '해당없음';
+        setTimeout(() => showReport(), 800);
+      }
+    } else if(q===9) {
+      designData.judgeCriteria = val;
+      showFbD('fb-dq9','ok','✓ 맞아요!','더 진한 용액일수록 방울토마토가 더 높이 떠요!');
+      setTimeout(() => showReport(), 800);
+    }
+  } else {
+    btn.classList.add('wrong-pick');
+    setTrust(trust, -5);
+    setTimeout(() => btn.classList.remove('wrong-pick'), 700);
+    if(q===2) showFbD('fb-dq2','ng','🤔 다시 생각해봐요!','이번 실험에서 비교하고 싶은 건 무엇인가요?');
+    else if(q===3) showFbD('fb-dq3','ng','🤔 다시 생각해봐요!','진하기를 다르게 만들려면 무엇을 달리해야 할까요?');
+    else if(q===8) showFbD('fb-dq8','ng','모두 가능해요!','아무거나 골라봐요!');
+    else if(q===9) showFbD('fb-dq9','ng','🤔 다시 생각해봐요!','진한 용액이 방울토마토에 어떤 영향을 줄까요?');
+    dqLocked[q] = false;
+  }
+}
+
+function showReport() {
+  setTrust(trust, 15);
+  const d = designData;
+  let beakers = '';
+  const bc = parseInt(d.beakerCount) || 2;
+  const sd = parseInt(d.sugarDiff) || 2;
+  for(let i=1; i<=bc; i++) {
+    beakers += `비커${i}: 물 ${d.waterMl}mL + 설탕 ${(i)*sd}스푼 / `;
+  }
+  beakers = beakers.slice(0,-3);
+  const rows = [
+    {k:'🎯 비교 목표', v: d.compareTarget || '용액의 진하기'},
+    {k:'🔀 다르게 할 조건', v: d.diffCond || '설탕의 양'},
+    {k:'⚖️ 같게 할 조건', v: (d.sameConds.length ? d.sameConds.join(', ') : '물의 양, 물의 온도, 젓는 횟수')},
+    {k:'🧪 비커 수', v: d.beakerCount + '개'},
+    {k:'💧 물의 양', v: d.waterMl + 'mL씩'},
+    {k:'🥄 설탕 양', v: beakers},
+    {k:'🔍 진하기 비교 방법', v: d.compareMethod || '방울토마토 띄우기'},
+    {k:'📏 판단 기준', v: d.judgeCriteria || '방울토마토가 더 높이 뜨는 용액'},
+    {k:'🌟 진하기 비교 방법들', v: (d.methods.length ? d.methods.join(', ') : '-')},
+  ];
+  document.getElementById('report-content').innerHTML = rows.map(r =>
+    `<div class="report-row"><div class="report-key">${r.k}</div><div class="report-val">${r.v}</div></div>`
+  ).join('<div class="section-divider"></div>');
+  document.getElementById('design-report').style.display = 'block';
+  answers.designData = JSON.stringify(designData);
+  sendData();
+  setTimeout(() => {
+    document.getElementById('btn4').classList.add('show');
+    scrollToEl('design-report');
+  }, 500);
+}
+
+function showFb(id, type, title, msg) {
+  const el = document.getElementById(id);
+  el.className = 'fb ' + type + ' show';
+  el.innerHTML = '<div class="fb-title">' + title + '</div>' + msg;
+}
+function showFbD(id, type, title, msg) {
+  const el = document.getElementById(id);
+  el.className = 'fb ' + type + ' show';
+  el.innerHTML = (title ? '<div class="fb-title">' + title + '</div>' : '') + msg;
+}
+function scrollToEl(id) {
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 100);
+}
+
+// ── 엔딩 ──
+function showEnding() {
+  document.getElementById('final-trust').textContent = trust;
+  let msg = '';
+  if(trust >= 80) msg = `여러분 덕분에 조르가 진짜 과학자가 됐어요!<br><br><em style="color:var(--cyan)">"고마워요! 이제 알았어요.<br>비교 실험을 할 땐 딱 하나만 다르게 하고<br>나머지는 모두 같게 해야 해요.<br>실험 없이 단정 짓지 않을게요!<br>초록별로 돌아가서 꼭 발표할게요! 🚀🌟"</em>`;
+  else if(trust >= 50) msg = `조르가 많은 것을 배웠어요!<br>다음엔 더 신중하게 생각하면 100%에 도달할 수 있어요! 💪`;
+  else msg = `조르가 아직 헷갈려하고 있어요 😢<br>다시 도전해서 조르를 완전히 설득해봐요!`;
+  document.getElementById('ending-msg').innerHTML = msg;
+  document.querySelectorAll('.stage-tab').forEach(t => t.classList.add('done'));
+}
+
+// ── 데이터 전송 (Google Apps Script) ──
+function sendData() {
+  const payload = {
+    timestamp: new Date().toISOString(),
+    grade: userData.grade,
+    cls: userData.cls,
+    name: userData.name,
+    trust: trust,
+    m1: answers.m1 || '',
+    m2: answers.m2 || '',
+    m3: answers.m3 || '',
+    dq1: answers.dq1 || '',
+    dq2: answers.dq2 || '',
+    dq3: answers.dq3 || '',
+    dq4: answers.dq4 || '',
+    dq5: answers.dq5 || '',
+    dq6: answers.dq6 || '',
+    dq7: answers.dq7 || '',
+    dq8: answers.dq8 || '',
+    designData: answers.designData || ''
+  };
+  if(APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
+    console.log('📋 [개발 모드] 전송 데이터:', payload);
+    return;
+  }
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  }).catch(e => console.log('전송 오류:', e));
+}
+
+// ── 재시작 ──
+function restart() {
+  location.reload();
+}
+</script>
+</body>
+</html>
