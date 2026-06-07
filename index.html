@@ -229,9 +229,9 @@ radial-gradient(1px 1px at 74% 52%,rgba(255,255,255,.3) 0%,transparent 100%);}
   <div id="m1-choices" style="display:none">
     <div class="info-box">💬 조르의 주장이 맞는지 틀린지, 이유와 함께 골라봐요!</div>
     <div class="choices">
-      <button class="choice" onclick="pickM1(this,false)">① 맞아요. 다 바닥에 남았으니까 녹는 양이 같아요.</button>
-      <button class="choice" onclick="pickM1(this,true)">② 틀렸어요. 한꺼번에 다 넣으면 얼마나 녹는지 알 수 없어요. 한 숟가락씩 넣으면서 관찰해야 해요.</button>
-      <button class="choice" onclick="pickM1(this,false)">③ 바닥에 남은 게 있으니까 실험 자체가 실패한 거예요.</button>
+      <button class="choice" onclick="pickM1(this,false)">① 맞아요. 바닥에 용질이 남아 있으니 세 용질 모두 녹지 않는 거예요.</button>
+      <button class="choice" onclick="pickM1(this,true)">② 틀렸어요. 한꺼번에 10숟가락을 넣으면 어디까지 녹는지 알 수 없어요. 한 숟가락씩 넣으면서 더 이상 안 녹을 때까지 확인해야 해요.</button>
+      <button class="choice" onclick="pickM1(this,false)">③ 바닥에 남았으니 물의 양을 더 늘리면 돼요.</button>
     </div>
   </div>
   <div class="fb" id="fb1"></div>
@@ -254,9 +254,9 @@ radial-gradient(1px 1px at 74% 52%,rgba(255,255,255,.3) 0%,transparent 100%);}
   <div id="m2-choices" style="display:none">
     <div class="info-box">💬 조르의 결론이 맞는지 틀린지, 이유와 함께 골라봐요!</div>
     <div class="choices">
-      <button class="choice" onclick="pickM2(this,false)">① 맞아요. 온도를 계속 올리면 무한대로 녹일 수 있어요.</button>
-      <button class="choice" onclick="pickM2(this,true)">② 틀렸어요. 온도가 높을수록 더 많이 녹는 경향이 있지만, 온도를 계속 올린다고 무한대로 녹는다는 건 실험으로 확인하지 않았어요.</button>
-      <button class="choice" onclick="pickM2(this,false)">③ 온도는 녹는 양과 아무 상관이 없어요.</button>
+      <button class="choice" onclick="pickM2(this,false)">① 맞아요. 20도씩 오를 때마다 증가하는 양이 있으니까 200℃도 계산할 수 있어요.</button>
+      <button class="choice" onclick="pickM2(this,true)">② 틀렸어요. 세 가지 결과만으로 200℃를 예측하는 건 맞지 않아요. 더 많은 온도에서 직접 실험해서 확인해야 해요.</button>
+      <button class="choice" onclick="pickM2(this,false)">③ 온도는 백반이 녹는 양과 아무 관련이 없어요.</button>
     </div>
   </div>
   <div class="fb" id="fb2"></div>
@@ -277,7 +277,7 @@ radial-gradient(1px 1px at 74% 52%,rgba(255,255,255,.3) 0%,transparent 100%);}
     </div>
   </div>
   <div class="essay-card" id="m3q1-card" style="display:none">
-    <div class="essay-q"><span class="q-num">Q1</span> 조르가 실험실을 떠난 밤 사이, 비커 속 물은 어떻게 변했을까요?</div>
+    <div class="essay-q"><span class="q-num">Q1</span> 조르가 실험실을 떠난 밤 사이, 비커 속 물의 온도는 어떻게 변했을까요?</div>
     <textarea class="essay-input" id="m3q1-inp" placeholder="생각한 것을 자유롭게 써봐요..."></textarea>
     <button class="essay-submit" id="m3q1-btn" onclick="submitM3Q(1)">확인 ✓</button>
     <div class="fb" id="fb3-q1"></div>
@@ -289,7 +289,7 @@ radial-gradient(1px 1px at 74% 52%,rgba(255,255,255,.3) 0%,transparent 100%);}
     <div class="fb" id="fb3-q2"></div>
   </div>
   <div class="essay-card" id="m3q3-card" style="display:none">
-    <div class="essay-q"><span class="q-num">Q3</span> Q1과 Q2를 연결해서 생각해봐요. 조르가 70℃에서 최대한 녹였던 백반이 다음 날 아침 비커 바닥에 다시 나타난 이유를 설명해봐요.</div>
+    <div class="essay-q"><span class="q-num">Q3</span> 조르가 70℃에서 최대한 녹였던 백반이 다음 날 아침 비커 바닥에 다시 나타난 이유를 설명해보세요.</div>
     <textarea class="essay-input" id="m3q3-inp" placeholder="Q1과 Q2를 연결해서 이유를 설명해봐요..."></textarea>
     <button class="essay-submit" id="m3q3-btn" onclick="submitM3Q(3)">확인 ✓</button>
     <div class="fb" id="fb3-q3"></div>
@@ -311,7 +311,7 @@ radial-gradient(1px 1px at 74% 52%,rgba(255,255,255,.3) 0%,transparent 100%);}
     </div>
   </div>
   <div class="essay-card" id="m4q1-card" style="display:none">
-    <div class="essay-q"><span class="q-num">Q1</span> 저은 비커와 안 저은 비커에서 백반이 최종적으로 녹은 양은 각각 몇 숟가락인가요? 조르의 실험 결과에서 찾아 써봐요.</div>
+    <div class="essay-q"><span class="q-num">Q1</span> 저은 비커와 안 저은 비커에서 설탕이 최종적으로 녹은 양은 각각 몇 숟가락인가요? 조르의 실험 결과에서 찾아 써봐요.</div>
     <textarea class="essay-input" id="m4q1-inp" placeholder="실험 결과에서 찾아 써봐요..."></textarea>
     <button class="essay-submit" id="m4q1-btn" onclick="submitM4Q(1)">확인 ✓</button>
     <div class="fb" id="fb4-q1"></div>
@@ -392,9 +392,9 @@ radial-gradient(1px 1px at 74% 52%,rgba(255,255,255,.3) 0%,transparent 100%);}
   </div>
 
   <div class="design-card" id="dq5-card" style="display:none">
-    <div class="design-q"><span class="step-num">Q5</span> 비커는 몇 개 준비할 건가요? 진하기를 비교하려면 최소 몇 개가 필요할까요?</div>
+    <div class="design-q"><span class="step-num">Q5</span> 비커는 몇 개 준비할 건가요? 1~5 사이로 적어보세요.</div>
     <div class="num-row">
-      <input class="num-input" id="inp-beaker" type="number" min="2" max="5" placeholder="2" />
+      <input class="num-input" id="inp-beaker" type="number" min="1" max="5" placeholder="3" />
       <span class="num-label">개</span>
       <button class="confirm-btn show" style="flex:1;margin-top:0" onclick="confirmDQ(5)">확인 ✓</button>
     </div>
@@ -402,12 +402,9 @@ radial-gradient(1px 1px at 74% 52%,rgba(255,255,255,.3) 0%,transparent 100%);}
   </div>
 
   <div class="design-card" id="dq6-card" style="display:none">
-    <div class="design-q"><span class="step-num">Q6</span> 비커마다 설탕을 몇 숟가락씩 차이 나게 넣을 건가요?</div>
-    <div class="num-row">
-      <input class="num-input" id="inp-sugar" type="number" min="1" max="5" placeholder="2" />
-      <span class="num-label">숟가락 차이</span>
-      <button class="confirm-btn show" style="flex:1;margin-top:0" onclick="confirmDQ(6)">확인 ✓</button>
-    </div>
+    <div class="design-q"><span class="step-num">Q6</span> 각 비커에 설탕을 몇 숟가락씩 넣을 건가요?</div>
+    <div id="dq6-sugar-inputs"></div>
+    <button class="confirm-btn show" style="width:100%;margin-top:10px" onclick="confirmDQ(6)">확인 ✓</button>
     <div class="fb" id="fb-dq6"></div>
   </div>
 
@@ -451,7 +448,7 @@ radial-gradient(1px 1px at 74% 52%,rgba(255,255,255,.3) 0%,transparent 100%);}
 <script>
 let trust = 0;
 let userData = {grade:'', cls:'', name:''};
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz0CLhuuZd-p2K-MsJsshAoUBsiktFucjquHUmEmAFsm07kRNdJBvmWzIQ4aD0gF37z/exec';
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
 let gameData = {
   m1:'', m2:'',
   m3q1:'', m3q2:'', m3q3:'',
@@ -529,7 +526,7 @@ function startGame() {
 let m1done = false;
 function startM1() {
   typeText('zor-text1','zor-cur1',
-    `나 실험했어요! 설탕, 소금, 백반 중 뭐가 가장 많이 녹는지\n알아보려고, 세 비커에 물을 똑같이 50mL씩 담았어요.\n각 비커에 설탕 10숟가락, 소금 10숟가락, 백반 10숟가락을\n한꺼번에 다 부어버렸어요! 세 비커 모두 바닥에 용질이 남았어요.\n다 똑같이 남았으니까 '세 용질은 물에 녹는 양이 모두 같다'는\n결론을 냈어요. 맞죠? 🧪`, 25, () => {
+    `설탕, 소금, 백반 중 뭐가 가장 많이 녹는지\n알아보고 싶어서 세 비커에 물을 똑같이 50mL씩 담았어요!\n각 비커에 설탕 10숟가락, 소금 10숟가락, 백반 10숟가락을\n한번에 다 넣고 비교해보았어요.\n세 비커 모두 바닥에 용질이 남았어요.\n세 용질은 물에 모두 녹지 않나봐요.\n어디서부터 잘못된 걸까요? 🧪`, 25, () => {
     document.getElementById('m1-choices').style.display = 'block';
   });
 }
@@ -539,16 +536,16 @@ function pickM1(btn, correct) {
   if(correct) {
     m1done = true; btn.classList.add('hit');
     gameData.m1 = '정답';
-    showFb('fb1','ok','🎉 정확해요!','한꺼번에 다 넣으면 어느 시점에서 안 녹기 시작했는지 알 수가 없어요!<br>한 숟가락씩 넣으면서 확인하고, 더 이상 안 녹을 때 숟가락 수를 세야<br>설탕·소금·백반이 <strong style="color:var(--cyan)">각각 몇 숟가락까지 녹는지</strong> 비교할 수 있어요!');
+    showFb('fb1','ok','🎉 정확해요!','한꺼번에 10숟가락을 넣으면 어디까지 녹는지 알 수가 없어요!<br>한 숟가락씩 넣으면서 확인하고, 더 이상 안 녹을 때 숟가락 수를 세야<br>설탕·소금·백반이 <strong style="color:var(--cyan)">각각 몇 숟가락까지 녹는지</strong> 비교할 수 있어요!');
     document.getElementById('zr1').style.display = 'flex';
     typeText('zr1-text','zr1-cur',
-      `아! 한꺼번에 다 넣으면 어느 시점에서\n안 녹기 시작했는지 알 수가 없군요!\n한 숟가락씩 넣으면서 확인해야 했어요.\n신뢰도 +25%!`, 28, () => {
+      `아! 한꺼번에 10숟가락을 다 넣으면\n어디까지 녹는지 알 수가 없군요!\n한 숟가락씩 넣으면서 더 이상 안 녹을 때까지\n확인했어야 했어요. 신뢰도 +25%!`, 28, () => {
       setTrust(25);
       document.getElementById('btn1').classList.add('show');
     });
   } else {
     btn.classList.add('miss'); gameData.m1 = '오답'; setTrust(-10);
-    showFb('fb1','ng','🤔 다시 생각해봐요!','바닥에 남은 양이 세 비커 모두 다를 수도 있어요.<br>한꺼번에 다 넣으면 무엇을 알 수 없게 될까요? 신뢰도 -10%');
+    showFb('fb1','ng','🤔 다시 생각해봐요!','바닥에 용질이 남은 것만으로는 \'전혀 안 녹는다\'고 할 수 없어요.<br>어디까지 녹는지 알려면 어떻게 해야 할까요? 신뢰도 -10%');
     setTimeout(() => {
       document.querySelectorAll('#m1-choices .choice').forEach(b => { b.disabled=false; b.classList.remove('miss','hit'); });
       document.getElementById('fb1').className = 'fb';
@@ -560,7 +557,7 @@ function pickM1(btn, correct) {
 let m2done = false;
 function startM2() {
   typeText('zor-text2','zor-cur2',
-    `온도 실험이에요! 20℃ 물에 백반 3숟가락, 40℃ 물에 백반 5숟가락,\n60℃ 물에 백반 8숟가락이 녹았어요.\n온도가 20도씩 오를 때마다 녹는 양이 늘어났어요!\n결론을 냈어요: '온도를 계속 올리면 백반을 무한대로 녹일 수 있어요!\n온도만 충분히 높으면 한계가 없어요!' 맞죠? 🌡️`, 25, () => {
+    `이번에는 온도를 달리하여 백반을 녹여보았어요!\n20℃ 물에 백반 3숟가락, 40℃ 물에 백반 5숟가락,\n60℃ 물에 백반 8숟가락이 녹았어요.\n온도가 20도씩 오를 때마다 녹는 양이 늘어났어요!\n온도를 올리다보면 200℃에서는 백반이 30숟가락 녹겠군요! 맞죠? 🌡️`, 25, () => {
     document.getElementById('m2-choices').style.display = 'block';
   });
 }
@@ -570,16 +567,16 @@ function pickM2(btn, correct) {
   if(correct) {
     m2done = true; btn.classList.add('hit');
     gameData.m2 = '정답';
-    showFb('fb2','ok','🎉 정확해요!','20℃·40℃·60℃ 세 구간에서만 확인했을 뿐이에요.<br><strong style="color:var(--cyan)">경향이 있다는 것</strong>과 <strong style="color:var(--red)">한계가 없다는 것</strong>은 완전히 다른 말이에요!');
+    showFb('fb2','ok','🎉 정확해요!','20℃, 40℃, 60℃ 세 가지 결과만으로 200℃를 예측하는 건 맞지 않아요.<br>온도가 높아질수록 더 많이 녹는 <strong style="color:var(--cyan)">경향</strong>이 있다는 것과<br><strong style="color:var(--red)">정확한 양을 예측할 수 있다</strong>는 건 완전히 다른 말이에요!');
     document.getElementById('zr2').style.display = 'flex';
     typeText('zr2-text','zr2-cur',
-      `맞아요! 세 구간에서 늘어나는 걸 봤지만\n그게 계속 무한대로 늘어난다는 뜻은 아니에요.\n80℃, 100℃도 실험해봐야 알 수 있어요.\n경향과 한계가 없다는 건 완전히 다른 말이에요!\n신뢰도 +25%!`, 28, () => {
+      `맞아요! 20℃, 40℃, 60℃에서만 확인했는데\n200℃까지 정확히 예측하기는 어려워요.\n더 많은 온도에서 직접 실험해서 확인해야 해요!\n신뢰도 +25%!`, 28, () => {
       setTrust(25);
       document.getElementById('btn2').classList.add('show');
     });
   } else {
     btn.classList.add('miss'); gameData.m2 = '오답'; setTrust(-10);
-    showFb('fb2','ng','🤔 다시 생각해봐요!','조르가 확인한 건 20℃, 40℃, 60℃ 세 구간뿐이에요.<br>몇 가지 결과만 보고 \'무한대\'라고 단정할 수 있을까요? 신뢰도 -10%');
+    showFb('fb2','ng','🤔 다시 생각해봐요!','세 가지 온도에서만 확인했는데 200℃를 정확히 계산할 수 있을까요?<br>더 많은 실험이 필요해요. 신뢰도 -10%');
     setTimeout(() => {
       document.querySelectorAll('#m2-choices .choice').forEach(b => { b.disabled=false; b.classList.remove('miss','hit'); });
       document.getElementById('fb2').className = 'fb';
@@ -591,12 +588,12 @@ function pickM2(btn, correct) {
 const M3_HINTS = [
   '💡 밤이 되면 실험실 온도가 내려가요. 비커 속 물도 서서히 식어서 온도가 낮아진 거예요.',
   '💡 미션 2에서 봤듯이 온도가 높을수록 더 많이 녹아요. 반대로 온도가 내려가면 물이 녹일 수 있는 백반의 양이 줄어들어요.',
-  '💡 온도가 내려가 물이 녹일 수 있는 양이 줄었고, 이미 녹아 있던 백반 중 일부가 더 이상 녹아 있을 수 없게 되어 다시 고체(결정)로 빠져나온 거예요!'
+  '💡 온도가 내려가면서 물이 녹일 수 있는 양이 줄었고, 이미 녹아 있던 백반 중 일부가 다시 고체(결정)로 빠져나온 거예요. 이 흰 가루가 바로 백반 결정이에요!'
 ];
-let m3answers = ['','',''];
+let m3completed = false, m3answers = ['','',''];
 function startM3() {
   typeText('zor-text3','zor-cur3',
-    `조르가 70℃ 따뜻한 물 100mL에 백반을 열심히 녹였어요.\n숟가락으로 계속 넣다 보니 어느 순간 백반이 더 이상 녹지 않고\n바닥에 쌓이기 시작했어요. '더 이상 안 녹는구나!'\n조르는 백반이 가득 녹은 용액을 그대로 책상 위에 두고 집에 갔어요.\n다음 날 아침, 비커 바닥에 반짝이는 것이 생겨 있었어요!\n'어? 어젯밤에 분명히 다 녹였는데, 이게 뭐지?!' 🔍`, 25, () => {
+    `70℃ 따뜻한 물 100mL에 백반을 열심히 녹였더니\n바닥에 남은 가루 없이 모두 용해되었어요.\n그런데 다음날 다시 와보니 바닥에 흰 가루가 다시 생겨났어요!\n이 가루들 어디에서 온 걸까요? 무슨 가루인가요? 🔍`, 25, () => {
     document.getElementById('m3q1-card').style.display = 'block';
     scrollToEl('m3q1-card');
   });
@@ -604,38 +601,41 @@ function startM3() {
 function submitM3Q(q) {
   const val = document.getElementById('m3q'+q+'-inp').value.trim();
   if(!val) return;
-  document.getElementById('m3q'+q+'-inp').disabled = true;
-  document.getElementById('m3q'+q+'-btn').disabled = true;
   m3answers[q-1] = val;
   showFbInline('fb3-q'+q, 'info', M3_HINTS[q-1]);
   if(q < 3) {
-    setTimeout(() => {
-      document.getElementById('m3q'+(q+1)+'-card').style.display = 'block';
-      scrollToEl('m3q'+(q+1)+'-card');
-    }, 700);
+    const next = document.getElementById('m3q'+(q+1)+'-card');
+    if(next.style.display === 'none') {
+      setTimeout(() => { next.style.display = 'block'; scrollToEl('m3q'+(q+1)+'-card'); }, 700);
+    }
   } else {
-    gameData.m3q1=m3answers[0]; gameData.m3q2=m3answers[1]; gameData.m3q3=m3answers[2];
-    setTrust(25);
-    setTimeout(() => {
-      document.getElementById('zr3').style.display='flex';
-      typeText('zr3-text','zr3-cur',
-        `완벽해요! 제가 70℃에서 최대한 녹인 건 맞아요.\n그런데 밤새 온도가 내려가면서 물이 녹일 수 있는\n백반의 양이 줄어든 거예요. 백반 일부가 다시\n고체로 빠져나온 거예요! 신뢰도 +25%!`, 28, () => {
-        document.getElementById('btn3').classList.add('show');
-      });
-    }, 700);
+    gameData.m3q1 = document.getElementById('m3q1-inp').value.trim();
+    gameData.m3q2 = document.getElementById('m3q2-inp').value.trim();
+    gameData.m3q3 = document.getElementById('m3q3-inp').value.trim();
+    if(!m3completed) {
+      m3completed = true;
+      setTrust(25);
+      setTimeout(() => {
+        document.getElementById('zr3').style.display='flex';
+        typeText('zr3-text','zr3-cur',
+          `완벽해요! 제가 70℃에서 최대한 녹인 건 맞아요.\n그런데 밤새 온도가 내려가면서 물이 녹일 수 있는\n백반의 양이 줄어든 거예요. 백반 일부가 다시\n고체로 빠져나온 거예요! 신뢰도 +25%!`, 28, () => {
+          document.getElementById('btn3').classList.add('show');
+        });
+      }, 700);
+    }
   }
 }
 
 // ── 미션 4: 젓기 ──
 const M4_HINTS = [
-  '💡 저은 비커와 안 저은 비커 모두 최종적으로 10숟가락이 녹았어요. 두 비커의 최종 녹은 양은 같아요.',
-  '💡 다른 뜻이에요! 저은 비커가 더 빠르게 녹았지만 최종 양(10숟가락)은 똑같았어요. \'빨리 녹는 것\'은 속도, \'많이 녹는 것\'은 양의 문제예요.',
+  '💡 저은 비커와 안 저은 비커 모두 최종적으로 5숟가락이 녹았어요. 두 비커의 최종 녹은 양은 같아요.',
+  '💡 다른 뜻이에요! 저은 비커가 더 빠르게 녹았지만 최종 양(5숟가락)은 똑같았어요. \'빨리 녹는 것\'은 속도, \'많이 녹는 것\'은 양의 문제예요.',
   '💡 올바른 결론: 젓기를 열심히 하면 더 빨리 녹일 수 있어요. 하지만 최대로 녹는 양은 온도와 물의 양이 같으면 젓든 안 젓든 똑같아요!'
 ];
-let m4answers = ['','',''];
+let m4completed = false, m4answers = ['','',''];
 function startM4() {
   typeText('zor-text4','zor-cur4',
-    `이번엔 젓기 실험이에요! 같은 온도, 같은 물의 양에서\n백반을 넣고 실험했어요.\n저은 비커에서는 백반이 빠르게 녹아서 10숟가락이 다 녹았어요.\n안 저은 비커에서는 시간이 오래 걸렸지만 결국 10숟가락이 다 녹았어요.\n조르는 '저은 비커에서 더 빠르게 다 녹았으니까, 더 많이 녹은 것도 맞아요!\n젓기를 열심히 하면 더 많이 녹일 수 있어요!'라고 결론을 냈어요. 🥄`, 25, () => {
+    `교과서에는 없지만 다른 실험도 해보고 싶어졌어요!\n같은 온도, 같은 물의 양에서 각각 5숟가락씩 설탕을 넣고 실험했어요.\n저은 비커에서는 설탕이 모두 녹았어요.\n젓지 않은 비커에서는 1시간 뒤에 모두 녹았어요.\n젓기를 열심히 하면 더 많은 양의 용질을 녹일 수 있다는 것을\n알게 되었어요. 맞죠? 🥄`, 25, () => {
     document.getElementById('m4q1-card').style.display='block';
     scrollToEl('m4q1-card');
   });
@@ -643,25 +643,28 @@ function startM4() {
 function submitM4Q(q) {
   const val = document.getElementById('m4q'+q+'-inp').value.trim();
   if(!val) return;
-  document.getElementById('m4q'+q+'-inp').disabled=true;
-  document.getElementById('m4q'+q+'-btn').disabled=true;
   m4answers[q-1]=val;
   showFbInline('fb4-q'+q, 'info', M4_HINTS[q-1]);
   if(q<3){
-    setTimeout(()=>{
-      document.getElementById('m4q'+(q+1)+'-card').style.display='block';
-      scrollToEl('m4q'+(q+1)+'-card');
-    }, 700);
+    const next = document.getElementById('m4q'+(q+1)+'-card');
+    if(next.style.display === 'none') {
+      setTimeout(()=>{ next.style.display='block'; scrollToEl('m4q'+(q+1)+'-card'); }, 700);
+    }
   } else {
-    gameData.m4q1=m4answers[0]; gameData.m4q2=m4answers[1]; gameData.m4q3=m4answers[2];
-    setTrust(25);
-    setTimeout(()=>{
-      document.getElementById('zr4').style.display='flex';
-      typeText('zr4-text','zr4-cur',
-        `맞아요! 제가 '더 빨리'와 '더 많이'를 혼동했어요!\n저은 비커도, 안 저은 비커도 결국 10숟가락이 다 녹았잖아요.\n저으면 녹는 속도가 빨라질 뿐,\n최대 양은 똑같아요! 신뢰도 +25%!`, 28, () => {
-        document.getElementById('btn4').classList.add('show');
-      });
-    }, 700);
+    gameData.m4q1 = document.getElementById('m4q1-inp').value.trim();
+    gameData.m4q2 = document.getElementById('m4q2-inp').value.trim();
+    gameData.m4q3 = document.getElementById('m4q3-inp').value.trim();
+    if(!m4completed) {
+      m4completed = true;
+      setTrust(25);
+      setTimeout(()=>{
+        document.getElementById('zr4').style.display='flex';
+        typeText('zr4-text','zr4-cur',
+          `맞아요! 제가 '더 빨리'와 '더 많이'를 혼동했어요!\n저은 비커도, 안 저은 비커도 결국 5숟가락이 다 녹았잖아요.\n저으면 녹는 속도가 빨라질 뿐,\n최대 양은 똑같아요! 신뢰도 +25%!`, 28, () => {
+          document.getElementById('btn4').classList.add('show');
+        });
+      }, 700);
+    }
   }
 }
 
@@ -707,20 +710,35 @@ function confirmDQ(n) {
     setTimeout(()=>{document.getElementById('dq5-card').style.display='block';scrollToEl('dq5-card');},600);
   } else if(n===5){
     const v=parseInt(document.getElementById('inp-beaker').value);
-    if(!v||v<2){showFbInline('fb-dq5','ng','진하기를 비교하려면 최소 2개가 필요해요!');return;}
-    if(v>5){showFbInline('fb-dq5','ng','2~5개 사이로 입력해봐요.');return;}
+    if(!v||v<1){showFbInline('fb-dq5','ng','1개 이상 입력해봐요!');return;}
+    if(v>5){showFbInline('fb-dq5','ng','1~5개 사이로 입력해봐요.');return;}
     dAnswers.beakers=v; gameData.dBeakers=v+'개';
     showFbInline('fb-dq5','ok','✓ '+v+'개 비커를 준비할게요!');
     document.getElementById('inp-beaker').disabled=true;
     document.querySelector('#dq5-card .confirm-btn').disabled=true;
+    let html='';
+    for(let i=1;i<=v;i++){
+      html+=`<div class="num-row" style="margin-bottom:10px">
+        <span class="num-label" style="min-width:54px;color:var(--cyan);font-weight:700">비커 ${i}</span>
+        <input class="num-input" id="inp-sugar-${i}" type="number" min="1" max="30" placeholder="${i*2}" />
+        <span class="num-label">숟가락</span>
+      </div>`;
+    }
+    document.getElementById('dq6-sugar-inputs').innerHTML=html;
     setTimeout(()=>{document.getElementById('dq6-card').style.display='block';scrollToEl('dq6-card');},600);
   } else if(n===6){
-    const v=parseInt(document.getElementById('inp-sugar').value);
-    if(!v||v<1||v>5){showFbInline('fb-dq6','ng','1~5숟가락 사이로 입력해봐요.');return;}
-    dAnswers.sugar=v; gameData.dSugar=v+'숟가락 차이';
-    showFbInline('fb-dq6','ok','✓ 비커마다 '+v+'숟가락씩 차이 나게 넣을게요!');
-    document.getElementById('inp-sugar').disabled=true;
+    const bc=dAnswers.beakers||1;
+    const amounts=[];
+    for(let i=1;i<=bc;i++){
+      const v=parseInt(document.getElementById('inp-sugar-'+i).value);
+      if(!v||v<1){showFbInline('fb-dq6','ng','모든 비커의 설탕량을 입력해봐요!');return;}
+      amounts.push(v);
+    }
+    dAnswers.sugar=amounts;
+    gameData.dSugar=amounts.map((a,i)=>`비커${i+1}:${a}숟가락`).join(', ');
+    for(let i=1;i<=bc;i++) document.getElementById('inp-sugar-'+i).disabled=true;
     document.querySelector('#dq6-card .confirm-btn').disabled=true;
+    showFbInline('fb-dq6','ok','✓ 각 비커의 설탕량을 정했어요!');
     setTimeout(()=>{document.getElementById('dq7-card').style.display='block';scrollToEl('dq7-card');},600);
   } else if(n===8){
     const v=document.getElementById('inp-q8').value.trim();
@@ -752,9 +770,9 @@ function pickDQ(q, btn, correct, val) {
   }
 }
 function showDesignReport() {
-  const bc=dAnswers.beakers||2, sd=dAnswers.sugar||2, water=dAnswers.water||'?';
+  const bc=dAnswers.beakers||1, amounts=dAnswers.sugar||[], water=dAnswers.water||'?';
   let beakers='';
-  for(let i=1;i<=bc;i++) beakers+=`비커${i}: 물 ${water}mL + 설탕 ${i*sd}숟가락<br>`;
+  for(let i=0;i<bc;i++) beakers+=`비커${i+1}: 물 ${water}mL + 설탕 ${amounts[i]||'?'}숟가락<br>`;
   document.getElementById('report-name').textContent=userData.name||'나';
   const rows=[
     {k:'🎯 실험 목표',v:'진하기가 다른 용액에서 방울토마토가 뜨는 정도 비교하기'},
